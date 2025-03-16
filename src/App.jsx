@@ -31,7 +31,7 @@ function App() {
       setBreakupText(response.choices[0].message.content);
     } catch (error) {
       console.error('Error generating breakup text:', error);
-      setBreakupText('Oops! Something went wrong. Try again. ' + error);
+      setBreakupText('Oops! Something went wrong. ' + error.code);
     } finally {
       setLoading(false);
     }
