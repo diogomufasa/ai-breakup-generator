@@ -14,25 +14,20 @@ function App() {
     const prompt = `Write a ${style} breakup text message for someone. The reason for the breakup is: ${reason}.`;
 
     try {
-      const response = await fetch(
-        'https://openrouter.ai/api/v1/chat/completions',
-        {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: 'deepseek/deepseek-chat:free',
-            messages: [
-              {
-                role: 'user',
-                content: prompt,
-              },
-            ],
-          }),
-        }
-      ).then(res => res.json());
+      const response = await fetch('https://ai.hackclub.com/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: 'user',
+              content: prompt,
+            },
+          ],
+        }),
+      }).then(res => res.json());
       setBreakupText(response.choices[0].message.content);
     } catch (error) {
       console.error('Error generating breakup text:', error);
