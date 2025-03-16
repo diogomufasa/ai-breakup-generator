@@ -27,10 +27,11 @@ function App() {
           ],
         }),
       }).then(res => res.json());
+      console.log(response);
       setBreakupText(response.choices[0].message.content);
     } catch (error) {
       console.error('Error generating breakup text:', error);
-      setBreakupText('Oops! Something went wrong. Try again.');
+      setBreakupText('Oops! Something went wrong. Try again. ' + error);
     } finally {
       setLoading(false);
     }
