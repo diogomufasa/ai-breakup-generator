@@ -17,8 +17,10 @@ function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_AI_API_KEY}`,
         },
         body: JSON.stringify({
+          model: 'qwen/qwen3-32b',
           messages: [
             {
               role: 'user',
