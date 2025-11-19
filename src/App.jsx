@@ -11,13 +11,14 @@ function App() {
   async function generateBreakupText() {
     setLoading(true);
     const prompt = `Write a ${style} breakup text message for someone. The reason for the breakup is: ${reason}.`;
+    const url = '/proxy/v1/chat/completions';
 
     try {
-      const response = await fetch('https://ai.hackclub.com/chat/completions', {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Bearer ${import.meta.env.VITE_AI_API_KEY}`,
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           model: 'qwen/qwen3-32b',
@@ -27,6 +28,7 @@ function App() {
               content: prompt,
             },
           ],
+          temperature: 0.7,
         }),
       }).then(res => res.json());
       console.log(response);
