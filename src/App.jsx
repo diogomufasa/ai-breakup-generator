@@ -11,7 +11,7 @@ function App() {
   async function generateBreakupText() {
     setLoading(true);
     const prompt = `Write a ${style} breakup text message for someone. The reason for the breakup is: ${reason}.`;
-    const url = '/proxy/v1/chat/completions';
+    const url = import.meta.env.DEV ? '/proxy/v1/chat/completions' : 'https://ai.hackclub.com/proxy/v1/chat/completions';
 
     try {
       const response = await fetch(url, {
